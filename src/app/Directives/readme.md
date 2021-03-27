@@ -1,0 +1,1 @@
+- this folder built in only ("Kendi içinde anguların hali hazırda gelen modüller bizim kendi directiflerimizi buraya atarız....")
