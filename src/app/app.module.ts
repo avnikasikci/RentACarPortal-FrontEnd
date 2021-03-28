@@ -18,10 +18,13 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { UserModule } from './directives/user/user.module';
+import { AdminModule } from './directives/admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+
     ProductComponent,
     CategoryComponent,
     NaviComponent,
@@ -35,6 +38,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    UserModule,
+    AdminModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,

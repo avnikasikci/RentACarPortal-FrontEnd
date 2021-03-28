@@ -11,7 +11,9 @@ const routes: Routes = [
   {path:"products", component:ProductComponent},
   {path:"products/category/:categoryId", component:ProductComponent},
   {path:"products/add", component:ProductAddComponent, canActivate:[LoginGuard]},
-  {path:"login", component:LoginComponent}
+  {path:"login", component:LoginComponent},
+  //New Area System
+  {path:"",redirectTo:'/user', pathMatch:'full'}
 ];
 
 @NgModule({
