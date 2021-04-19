@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutUsComponent } from './components/about-us/about-us.components';
-import { HomeComponent } from './components/home/home.components';
+
 import { AdminComponent } from './admin.component';
+import { BrandsPageComponent } from './pages/brands-page/brands-page.component';
+import { CarsPageComponent } from './pages/cars-page/cars-page.component';
+import { ColorsPageComponent } from './pages/colors-page/colors-page.component';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
 
 const routes: Routes = [
   //New Area System
-  {path:"admin",component:AdminComponent,children:
+  {path:"admindemo",component:AdminComponent,children:
   [
-    {path:'',component:HomeComponent},
-    {path:'home',component:HomeComponent},
-    {path:'AboutUs',component:AboutUsComponent},
+    {path:'',component:AdminComponent},
+    {path:'cars',component:CarsPageComponent},
+    {path:'users',component:UsersPageComponent},
+    {path:'brands',component:BrandsPageComponent},
+    {path:'colors',component:ColorsPageComponent},
+
   ]}
 ];
 
-export const UserRouting = RouterModule.forRoot(routes);
+export const AdminRouting = RouterModule.forRoot(routes);
