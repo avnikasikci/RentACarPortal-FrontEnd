@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DemoPopopModalComponent } from './components/demo-popop-modal/demo-popop-modal.component';
 import { AdminBrandsPageComponent } from './pages/admin-brands-page/admin-brands-page.component';
 import { AdminCarsPageComponent } from './pages/admin-cars-page/admin-cars-page.component';
 import { AdminColorsPageComponent } from './pages/admin-colors-page/admin-colors-page.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"cars", component:CarsPageComponent},
   {path:"login", component:LoginPageComponent},
   {path:"register", component:RegisterPageComponent},
+  {path:"demo", component:DemoPopopModalComponent},
   // {path:"products", component:ProductComponent},
   // {path:"products/category/:categoryId", component:ProductComponent},
   // {path:"products/add", component:ProductAddComponent, canActivate:[LoginGuard]},

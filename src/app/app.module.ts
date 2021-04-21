@@ -12,6 +12,7 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 import {ToastrModule} from "ngx-toastr";
 // import { CartSummaryComponent } from './directives/demoV1/components/cart-summary/cart-summary.component';
+import { ModalModule } from './components/_modal';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserModule } from './directives/user/user.module';
@@ -30,6 +31,8 @@ import { AdminCarsPageComponent } from './pages/admin-cars-page/admin-cars-page.
 import { AdminColorsPageComponent } from './pages/admin-colors-page/admin-colors-page.component';
 import { AdminUsersPageComponent } from './pages/admin-users-page/admin-users-page.component';
 import { CarPipe } from './pipes/car.pipe';
+import { DemoPopopModalComponent } from './components/demo-popop-modal/demo-popop-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -50,6 +53,7 @@ import { CarPipe } from './pipes/car.pipe';
     AdminColorsPageComponent,
     AdminUsersPageComponent,
     CarPipe,
+    DemoPopopModalComponent,
     // CartSummaryComponent,    
   ],
   imports: [
@@ -58,13 +62,15 @@ import { CarPipe } from './pipes/car.pipe';
     UserModule,
     AdminModule,
     DemoModule,
+    ModalModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
-    })
+    }),
+    NgbModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}

@@ -1,4 +1,4 @@
-export interface CarViewModel {
+export class CarViewModel {
     id: number;
     name: string;
     brandId: number;
