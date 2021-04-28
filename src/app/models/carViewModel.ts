@@ -6,6 +6,6 @@ export class CarViewModel {
     dailyPrice: number;
     minFindeksScore: number;
     modelYear: number;
-    description: number;
+    description: string;
   }
   

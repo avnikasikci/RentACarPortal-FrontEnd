@@ -1,10 +1,14 @@
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <app-navbar-top>
-            </app-navbar-top>
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</div> -->
-<router-outlet></router-outlet>
+<div class="min-vh-100 d-flex flex-column">
+    <header>
+    <app-navbar-top></app-navbar-top>
+    </header>
+
+    <main class="flex-fill">
+        <router-outlet></router-outlet>
+    </main>
+
+    <footer>
+        <!-- <app-footer></app-footer> -->
+        <!-- <app-app-footer></app-app-footer> -->
+    </footer>
+</div>

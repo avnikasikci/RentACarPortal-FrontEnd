@@ -1,138 +1,213 @@
 <div class="row">
+  <div class="col-md-12">
+
+    <div class="col-md-12">
+      <div *ngIf="dataLoaded==false" class="spinner-border text-primary"
+        role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" style="text-align: center;">
+        <label style="text-align: center;">Name</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control"
+          id="filterText" placeholder="Search Car..">
+      </div>
+      <div class="col-md-3" style="text-align: center;">
+        <label>Color</label>
+        <ng-select [items]="ColorList"
+           bindLabel="name"
+           autofocus
+           bindValue="id"
+           placeholder="Select Color"
+           [(ngModel)]="filterColor">
+  </ng-select>
+  
+  <br/>
+  
+      </div>
+      <div class="col-md-3" style="text-align: center;">
+        <label>Brand</label>
+        <ng-select [items]="BrandList"
+           bindLabel="name"
+           autofocus
+           bindValue="id"
+           placeholder="Select Brand"
+           [(ngModel)]="filterBrand">
+  </ng-select>
+      </div>
+      <div class="col-md-1">
+        <!-- <button (click)="searchCarList(1)" type="button" class="btn btn-secondary">Ara</button> -->
+        <br>
+        <button  type="button" class="btn btn-secondary">Ara</button>
+      </div>
+
+      <div *ngIf="filterText.length>2 || filterColor > 0 || filterBrand > 0" class="alert alert-success">
+        <label *ngIf="filterText.length>2"> {{filterText}} seearching.</label>
+        <label *ngIf="filterColor > 0"> {{filterColor}} seearching.</label>
+        <label *ngIf="filterBrand > 0"> {{filterBrand}} seearching.</label>        
+      </div>
+    </div>
+    <br>
     <div class="col-md-12">
 
-        <div class="col-md-12">
-            <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        <div id="searchBlog">
-            <div class="col-md-4">
-                <div class="dropdown">
-                    <button class="dropbtn">Brand</button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-                &nbsp; &nbsp; &nbsp;
-                <div class="dropdown">
-                    <button class="dropbtn">Color</button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Search Car..">
-            </div>
-            <div class="col-md-1">
-                <button (click)="editCar(1)" type="button" class="btn btn-secondary">Ara</button>
-            </div>
+      <table *ngIf="dataLoaded==true" class="table">
+        <thead>
+          <tr>
+            <!-- <th>Id</th> -->
+            <th>Car Name</th>
+            <th>brandId</th>
+            <th>brandName</th>
+            <th>colorId</th>
+            <th>colorName</th>
 
-            <div *ngIf="filterText.length>2" class="alert alert-success">
-                {{filterText}} seearching.
-            </div>
+            <th>
 
-        </div>
+                <button (click)="openEditCarModel(0)" type="button" class="btn
+                  btn-secondary">Create
+                </button>
+    
 
-        <div class="col-md-12">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carEntity of CarDetailList | carfilter:filterText:filterBrand:filterColor">      
+            <td>{{ carEntity.carName }}</td>
+            <td>{{ carEntity.brandId }}</td>
+            <td>{{ carEntity.brandName }}</td>
+            <td>{{ carEntity.colorId }}</td>
+            <td>{{ carEntity.colorName }}</td>
+            <td><button (click)="openEditCarModel(carEntity.id)" type="button"
+                class="btn btn-success">Edit</button>
+            </td>
+          </tr>
+        </tbody>
 
-            <table *ngIf="dataLoaded==true" class="table">
-                <thead>
-                    <tr>
-                        <!-- <th>Id</th> -->
-                        <th>Car Name</th>
-                        <th>brandId</th>
-                        <th>brandName</th>
-                        <th>colorId</th>
-                        <th>colorName</th>
-
-                        <th>
-                            <div class="col-md-1">
-                                <button (click)="openEditCarModel(0)" type="button" class="btn btn-secondary">Ekle / Düzenle
-                                </button>
-                            </div>
-
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let carEntity of CarDetailList | car:filterText">
-                        <!-- <td>{{ carEntity.name }}</td>
-                        <td>{{ carEntity.name | uppercase}}</td>
-                        <td>{{ carEntity.name }}</td>
-                        <td>{{ carEntity.name |currency }}</td>
-                        <td>{{ carEntity.unitPrice |vatAdded:18 | currency }}</td> -->
-                        <td>{{ carEntity.carName }}</td>
-                        <td>{{ carEntity.brandId }}</td>
-                        <td>{{ carEntity.brandName }}</td>
-                        <td>{{ carEntity.colorId }}</td>
-                        <td>{{ carEntity.colorName }}</td>
-                        <td><button (click)="openEditCarModel(carEntity.id)" type="button" class="btn btn-success">Edit</button>
-                        </td>
-                    </tr>
-                </tbody>
-
-            </table>
-
-        </div>
+      </table>
 
     </div>
+
+  </div>
 </div>
 
 
 
-
-<jw-modal id="custom-modal-1">
-    <h1>A Custom Modal Window!</h1>
-    <p>Home page text: <input type="text" /></p>
-    <button (click)="closeModal('custom-modal-1');">Close</button>
-</jw-modal>
-
-
 <jw-modal id="custom-modal-car-1">
-    <!-- <h1 style="height:100px">A Tall Custom Modal Window!</h1> -->
-    <label>Avni Kasikci</label>
-    <p>[([(ngModel)]="editCarViewModel")]</p>
-    {{editCarViewModel.name}}
+
+  <form [formGroup]="carEditForm">
+    <div class="form-group mb-3">
+      <input hidden type="text" formControlName="id">
+      <label for="car-name-input" class="fw-bold mb-3">Car Name</label>
+      <input
+        type="text"
+        id="car-name-input"
+        formControlName="name"
+        class="form-control"
+        placeholder="Car Name"
+      />
+    </div>
+
+    <div class="row">
+      <div id="brand-input" class="col-md mb-3">
+        <label for="brand-input" class="d-flex align-content-center">
+          <span class="fw-bold d-flex align-items-center">Brand</span>
+
+        </label>
+        <ng-select [items]="BrandList"
+           bindLabel="name"
+           autofocus
+           bindValue="id"
+           placeholder="Select Brand"
+           [(ngModel)]="selectedBrand"
+           formControlName="brandId"
+           >
+          </ng-select>
 
 
-    <form [formGroup]="carEditForm">
-        <div class="mb-3">
-            <label for="productName">Ürün adı</label>
-            <div class="form-group">
-                <input type="text" id="productName" formControlName="productName" class="form-control" placeholder="Ürün adı" />
-            </div>
-        </div>
+      </div>
 
-        <div class="mb-3">
-            <label for="categoryId">Kategori</label>
-            <div class="form-group">
-                <input type="number" id="categoryId" formControlName="categoryId" class="form-control" placeholder="Kategori" />
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="unitsInStock">Stok Adedi</label>
-            <div class="form-group">
-                <input type="number" id="unitsInStock" formControlName="unitsInStock" class="form-control" placeholder="Stok adedi" />
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="unitPrice">Birim Fiyatı</label>
-            <div class="form-group">
-                <input type="number" id="unitPrice" formControlName="unitPrice" class="form-control" placeholder="Fiyatı" />
-            </div>
-        </div>
+      <div id="color-input" class="col-md mb-3">
+        <label for="color-input" class="d-flex align-content-center">
+          <span class="fw-bold d-flex align-items-center">Color</span>
 
-    </form>
+        </label>
+        <ng-select [items]="ColorList"
+           bindLabel="name"
+           autofocus
+           bindValue="id"
+           placeholder="Select Color"
+           [(ngModel)]="selectedColor"
+           formControlName="colorId"
+           >
+          </ng-select>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="daily-price-input" class="fw-bold mb-3">Daily Price</label>
+      <input
+        type="number"
+        formControlName="dailyPrice"
+        id="daily-price-input"
+        class="form-control"
+        placeholder="Daily Price"
+      />
+    </div>
 
+    <div class="form-group mb-3">
+      <label for="min-findeks-score-input" class="fw-bold mb-3"
+        >Minimum Findeks Score</label
+      >
+      <input
+        id="min-findeks-score-input"
+        type="number"
+        formControlName="minFindeksScore"
+        class="form-control"
+        placeholder="Min Findeks Score"
+      />
+    </div>
 
+    <div class="form-group mb-3">
+      <label for="model-year-input" class="fw-bold mb-3">Model Year</label>
+      <input
+        type="number"
+        formControlName="modelYear"
+        id="model-year-input"
+        class="form-control"
+        placeholder="Model Year"
+      />
+    </div>
 
+    <div class="form-group mb-3">
+      <label for="description-input" class="fw-bold mb-3">Description</label>
+      <textarea
+        type="text"
+        formControlName="description"
+        id="description-input"
+        class="form-control"
+        placeholder="Description..."
+      ></textarea>
+    </div>
 
+  </form>
+<div class="row" style="text-align: center;">
 
-    <button (click)="closeModal('custom-modal-car-1');">Close</button>
+  <div class="col-md-6">
+  <div class="card-footer">
+    <button (click)="SaveEditModelCar()" class="btn btn-primary btn-lg w-100 shadow-sm">
+      Save
+    </button>
+  </div>
+  </div>
+  <div class="col-md-6">
+  <div class="card-footer">
+    <button (click)="closeModal('custom-modal-car-1');" class="btn btn-primary btn-lg w-100 shadow-sm">
+      Close
+    </button>
+  </div>
+  </div>
+
+</div>
+  
 </jw-modal>
+

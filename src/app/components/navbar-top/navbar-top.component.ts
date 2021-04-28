@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserDetail } from 'src/app/models/userDetail';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar-top',
@@ -7,8 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarTopComponent implements OnInit {
 
-  constructor() { }
+  
+  userDetail$: Observable<UserDetail | undefined> = this.authService.getUserDetail();
 
+  constructor(private authService: AuthService) {}
+    LoginStatus$ : Observable<boolean>;
+    UserName$ : Observable<string>;    
   ngOnInit(): void {
   }
 

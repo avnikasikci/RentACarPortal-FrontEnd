@@ -1,30 +1,78 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img id="logo" src="assets/img/logo.png" /><strong>Rent a
-                    Car's</strong>&nbsp;Demo</a><button data-toggle="collapse" class="navbar-toggle collapsed" data-target="#navcol-1">
-                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
-                    class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active">
-                    <a routerLink="cars" routerLinkActive="active">Cars</a>
+<nav class="navbar navbar-expand-lg navbar-light py-5">
+    <div class="container-fluid container-md">
+        <a class="navbar-brand" routerLink="">Rental Car</a>
+
+        <div id="navbar-links" class="collapse navbar-collapse ms-5 order-2 order-lg-0">
+            <ul class="navbar-nav text-center me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Rent</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cars" routerLinkActive="active"
+            >Cars</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Service</a>
                 </li>
-                <li><a href="#">Pricing </a></li>
-                <li><a href="#">Order </a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li>
-                    <a routerLink="admin" class="Admin" href="#">Admin Panel</a>
-                </li>
-                <li>
-                    <a routerLink="login" class="login" href="#">Log In</a>
-                </li>
-                <li>
-                    <a routerLink="register" class="btn btn-default action-button" role="button" href="#">Sign Up</a>
+                <li class="nav-item">
+                    <a class="nav-link">Support</a>
                 </li>
             </ul>
         </div>
+
+        <div *ngIf="!(userDetail$ | async)" class="d-flex justify-content-center order-0 order-lg-1">
+            <a class="btn mx-2 py-2 px-4 rounded-1 bg-transparent" routerLink="register">Sign Up</a
+      >
+      <a
+        class="btn btn-primary mx-2 py-2 px-4 rounded-1 shadow"
+        routerLink="login"
+        >Log in</a
+      >
+    </div>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <div *ngIf="userDetail$ | async" class="dropdown">
+
+
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin Panel
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a routerLink="admin/carEdit" class="dropdown-item">Cars Settings</a>
+          <a routerLink="admin/brandEdit" class="dropdown-item">Brands Settings</a>
+          <a routerLink="admin/colorEdit" class="dropdown-item">Colors Setting </a>
+          <a routerLink="admin/userEdit" class="dropdown-item">Users Setting </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="userDetail$ | async" class="dropdown">      
+      
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ (userDetail$ | async)?.firstName }}
+          {{ (userDetail$ | async)?.lastName }}
+        </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a routerLink="account" class="dropdown-item">Account Settings</a>
+        <a routerLink="wallet" class="dropdown-item">Wallet</a> 
+        <a routerLink="logout" class="dropdown-item">Log out</a>
+      </div>
+
+        </div>
+
+
+    </div>
+    <button class="navbar-toggler order-1 order-lg-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     </div>
 </nav>
+
